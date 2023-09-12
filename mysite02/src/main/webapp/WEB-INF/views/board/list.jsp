@@ -32,33 +32,50 @@
 						<th>작성일</th>
 						<th>&nbsp;</th>
 					</tr>
-					<tr>
-						<td>3</td>
-						<td><a href="">세 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-10-11 12:04:20</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td><a href="">두 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-10-02 12:04:12</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td><a href="">첫 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-09-25 07:24:32</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
+					<c:set var="count" value="${fn:length(list) }" />
+					<c:forEach items="${list }" var="vo" varStatus="status">
+						<tr>
+							<td>${count - status.index}</td>
+							<td style="padding-left:${(vo.depth-1)*30}px">
+							<c:if test="${vo.depth >= 2}"> 
+							<img src="${pageContext.request.contextPath }/assets/images/reply.png">							
+							</c:if>
+							<a href="${pageContext.request.contextPath }/board?a=detailboardorreply&no=${vo.no}&title=${vo.title}&contents=${vo.contents}&groupNo=${vo.groupNo}&depth=${vo.depth}&orderNo=${vo.orderNo}">${vo.title }</a></td>
+							<td>${vo.userNo }</td>
+							<td>${vo.hit }</td>
+							<td>${vo.reg_date }</td>
+							<td><c:choose>
+									<c:when test="${empty authUser }">
+
+									</c:when>
+									<c:when test="${authUser.getNo() == vo.userNo }">
+										<a
+											href="${pageContext.request.contextPath }/board?a=deleteboardorreplyform&no=${vo.no}"
+											class="del">삭제</a>
+									</c:when>
+									<c:otherwise>
+
+									</c:otherwise>
+								</c:choose></td>
+						</tr>
+					</c:forEach>
 				</table>
+				<!-- pager 추가 -->
+				<div class="pager">
+					<ul>
+						<li><a href="">◀</a></li>
+						<li><a href="">1</a></li>
+						<li class="selected">2</li>
+						<li><a href="">3</a></li>
+						<li>4</li>
+						<li>5</li>
+						<li><a href="">▶</a></li>
+					</ul>
+				</div>
+				<!-- pager 추가 -->
 				<div class="bottom">
-					<a href="" id="new-book">글쓰기</a>
+					<a href="${pageContext.request.contextPath }/board?a=addboardform"
+						id="new-book">글쓰기</a>
 				</div>
 			</div>
 		</div>
