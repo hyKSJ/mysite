@@ -24,7 +24,7 @@
 							<h2>안녕하세요.</h2>
 						</c:when>
 						<c:otherwise>
-							<h2>안녕하세요. ${authUser.name }의 mysite에 오신 것을 환영합니다.</h2>
+							<h2>안녕하세요. 김상준의 mysite에 오신 것을 환영합니다.</h2>
 						</c:otherwise>
 					</c:choose>
 
