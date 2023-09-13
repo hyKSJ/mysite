@@ -33,9 +33,28 @@
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board">글목록</a> <a
-						href="${pageContext.request.contextPath }/board?a=updateboardorreplyform&no=${param.no}&title=${param.title}&contents=${param.contents}&groupNo=${param.groupNo}&depth=${param.depth}&orderNo=${param.orderNo}">글수정</a>
-						<a href="${pageContext.request.contextPath }/board?a=addreplyform&groupNo=${param.groupNo}&depth=${param.depth}&no=${param.no}&title=${param.title}&contents=${param.contents}&orderNo=${param.orderNo}">답글달기</a>
+					<a href="${pageContext.request.contextPath }/board?begin=1&i=1">글목록</a>
+					<c:choose>
+						<c:when test="${empty authUser }">
+
+						</c:when>
+						<c:when test="${authUser.getNo() == param.userNo }">
+							<a
+								href="${pageContext.request.contextPath }/board?a=updateboardorreplyform&no=${param.no}&userNo=${param.userNo}&title=${param.title}&contents=${param.contents}&groupNo=${param.groupNo}&depth=${param.depth}&orderNo=${param.orderNo}">글수정</a>
+						</c:when>
+						<c:otherwise>
+
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${empty authUser }">
+						</c:when>
+						<c:otherwise>
+							<a
+						href="${pageContext.request.contextPath }/board?a=addreplyform&userNo=${param.userNo}&groupNo=${param.groupNo}&depth=${param.depth}&no=${param.no}&title=${param.title}&contents=${param.contents}&orderNo=${param.orderNo}">답글달기</a>
+						</c:otherwise>
+					</c:choose>
+	
 				</div>
 			</div>
 		</div>

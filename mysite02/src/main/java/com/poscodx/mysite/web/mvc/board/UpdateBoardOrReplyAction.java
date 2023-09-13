@@ -19,12 +19,13 @@ public class UpdateBoardOrReplyAction implements Action {
 		String groupNo = request.getParameter("groupNo");
 		String depth = request.getParameter("depth");
 		String orderNo = request.getParameter("orderNo");
+		String userNo = request.getParameter("userNo");
 
 
 		new BoardDao().updateTitleAndContentsByNo(title, contents, no);
 
 		response.sendRedirect(request.getContextPath() + "/board?a=detailboardorreply&no=" + no + "&title=" + title
-				+ "&contents=" + contents+ "&groupNo=" + groupNo+ "&depth=" + depth+ "&orderNo=" + orderNo);
+				+ "&contents=" + contents+ "&groupNo=" + groupNo+ "&depth=" + depth+ "&orderNo=" + orderNo + "&userNo=" + userNo);
 
 	}
 

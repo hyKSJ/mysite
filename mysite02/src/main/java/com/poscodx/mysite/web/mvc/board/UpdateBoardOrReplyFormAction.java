@@ -19,12 +19,14 @@ public class UpdateBoardOrReplyFormAction implements Action {
 		String groupNo = request.getParameter("groupNo");
 		String depth = request.getParameter("depth");
 		String orderNo = request.getParameter("orderNo");
+		String userNo = request.getParameter("userNo");
 		request.setAttribute("no", no);
 		request.setAttribute("title", title);
 		request.setAttribute("contents", contents);
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("depth", depth);
 		request.setAttribute("orderNo", orderNo);
+		request.setAttribute("userNo", userNo);
 		WebUtil.forward("board/modify",request, response);
 
 	}

@@ -21,7 +21,7 @@
 					<input type="password" name="password">
 					<input type="submit" value="확인">
 				</form>
-				<a href="${pageContext.request.contextPath }/board">글목록</a>
+				<a href="${pageContext.request.contextPath }/board?begin=1&i=1">글목록</a>
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp" />

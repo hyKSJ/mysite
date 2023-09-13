@@ -40,7 +40,7 @@ public class AddReplyAction implements Action {
 
 		new BoardDao().insertreply(vo);
 
-		response.sendRedirect(request.getContextPath() + "/board");
+		response.sendRedirect(request.getContextPath() + "/board?begin=1&i=1");
 
 	}
 

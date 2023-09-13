@@ -38,7 +38,7 @@
 					</table>
 					<div class="bottom">
 						<a
-							href="${pageContext.request.contextPath }/board?a=updateboardorreplyform&no=${param.no}&title=${param.title}&contents=${param.contents}">취소</a>
+							href="${pageContext.request.contextPath }/board?a=detailboardorreply&no=${param.no}&title=${param.title}&contents=${param.contents}&userNo=${param.userNo}&groupNo=${param.groupNo}&depth=${param.depth}&orderNo=${param.orderNo}">취소</a>
 						<input type="submit" value="등록">
 					</div>
 				</form>

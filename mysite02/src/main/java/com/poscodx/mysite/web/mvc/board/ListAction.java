@@ -16,8 +16,14 @@ public class ListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<BoardVo> list = new BoardDao().findAll();
+		String begin = request.getParameter("begin");
+		String i = request.getParameter("i");
+		int page = Integer.parseInt(i);
+		
+		List<BoardVo> list = new BoardDao().findAll(page);
+		
 		request.setAttribute("list", list);
+		request.setAttribute("begin", begin);
 		WebUtil.forward("board/list",request, response);
 
 	}

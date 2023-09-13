@@ -31,7 +31,7 @@ public class AddBoardAction implements Action {
 
 		new BoardDao().insert(vo);
 
-		response.sendRedirect(request.getContextPath() + "/board");
+		response.sendRedirect(request.getContextPath() + "/board?begin=1&i=1");
 	}
 
 }

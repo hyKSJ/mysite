@@ -14,21 +14,25 @@ import javax.servlet.http.HttpSession;
 import com.poscodx.mysite.vo.BoardVo;
 
 public class BoardDao {
-	public List<BoardVo> findAll() {
+	public List<BoardVo> findAll(int page) {
 		List<BoardVo> result = new ArrayList<>();
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		int page1 = (page-1) * 5;
 
 		try {
 			conn = getConnection();
 
 			// 3. SQL 준비
-			String sql = "select a.no, a.title, a.contents, a.hit, a.reg_date, a.g_no, a.o_no, a.depth, a.user_no, b.name from board a, user b where a.user_no = b.no order by g_no desc, o_no asc";
+			String sql = "select a.no, a.title, a.contents, a.hit, a.reg_date, a.g_no, a.o_no, a.depth, a.user_no, b.name, (select ceiling(count(*)/5) from board) as total from board a, user b where a.user_no = b.no order by g_no desc, o_no asc limit ?, 5";
 			pstmt = conn.prepareStatement(sql);
 
 			// 4. binding
+			
+			pstmt.setInt(1, page1);
 
 			// 5. SQL 실행
 			rs = pstmt.executeQuery();
@@ -45,6 +49,7 @@ public class BoardDao {
 				int depth = rs.getInt(8);
 				Long userNo = rs.getLong(9);
 				String name = rs.getString(10);
+				int total = rs.getInt(11);
 
 				BoardVo vo = new BoardVo();
 				vo.setNo(no);
@@ -57,6 +62,8 @@ public class BoardDao {
 				vo.setDepth(depth);
 				vo.setUserNo(userNo);
 				vo.setName(name);
+				vo.setTotal(total);
+				vo.setPage(page);
 
 				result.add(vo);
 			}

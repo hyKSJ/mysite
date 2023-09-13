@@ -14,6 +14,6 @@
 			</c:otherwise>
 		</c:choose>
 		<li><a href="${pageContext.request.contextPath }/guestbook">방명록</a></li>
-		<li><a href="${pageContext.request.contextPath }/board">게시판</a></li>
+		<li><a href="${pageContext.request.contextPath }/board?begin=1&i=1">게시판</a></li>
 	</ul>
 </div>
