@@ -25,7 +25,7 @@ public class BoardDao {
 			conn = getConnection();
 
 			// 3. SQL 준비
-			String sql = "select no, title, contents, hit, reg_date, g_no, o_no, depth, user_no from board order by g_no desc, o_no asc";
+			String sql = "select a.no, a.title, a.contents, a.hit, a.reg_date, a.g_no, a.o_no, a.depth, a.user_no, b.name from board a, user b where a.user_no = b.no order by g_no desc, o_no asc";
 			pstmt = conn.prepareStatement(sql);
 
 			// 4. binding
@@ -44,6 +44,7 @@ public class BoardDao {
 				int orderNo = rs.getInt(7);
 				int depth = rs.getInt(8);
 				Long userNo = rs.getLong(9);
+				String name = rs.getString(10);
 
 				BoardVo vo = new BoardVo();
 				vo.setNo(no);
@@ -55,6 +56,7 @@ public class BoardDao {
 				vo.setOrderNo(orderNo);
 				vo.setDepth(depth);
 				vo.setUserNo(userNo);
+				vo.setName(name);
 
 				result.add(vo);
 			}
@@ -81,7 +83,6 @@ public class BoardDao {
 		return result;
 	}
 
-	
 	public void insert(BoardVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -92,7 +93,6 @@ public class BoardDao {
 			String sql = "insert into board select null, ?, ?, 0, curdate(), MAX(g_no) + 1, 1, 1, ? from board";
 			pstmt = conn.prepareStatement(sql);
 
-			
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContents());
 			pstmt.setLong(3, vo.getUserNo());
@@ -121,23 +121,23 @@ public class BoardDao {
 
 		try {
 			conn = getConnection();
-			
+
 			String update_sql = "update board set o_no = o_no + 1 where g_no = ? and o_no >= ?";
-			
+
 			update_pstmt = conn.prepareStatement(update_sql);
 			update_pstmt.setInt(1, vo.getGroupNo());
-			update_pstmt.setInt(2, vo.getOrderNo()+1);
-			
+			update_pstmt.setInt(2, vo.getOrderNo() + 1);
+
 			update_pstmt.executeQuery();
 
 			String insert_sql = "insert into board values(null, ?, ?, 0, curdate(),?, ?, ?, ?)";
-			
+
 			insert_pstmt = conn.prepareStatement(insert_sql);
 			insert_pstmt.setString(1, vo.getTitle());
 			insert_pstmt.setString(2, vo.getContents());
 			insert_pstmt.setInt(3, vo.getGroupNo());
-			insert_pstmt.setInt(4, vo.getOrderNo()+1);			
-			insert_pstmt.setInt(5, vo.getDepth()+1);
+			insert_pstmt.setInt(4, vo.getOrderNo() + 1);
+			insert_pstmt.setInt(5, vo.getDepth() + 1);
 			insert_pstmt.setLong(6, vo.getUserNo());
 
 			insert_pstmt.executeQuery();
@@ -158,13 +158,13 @@ public class BoardDao {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
+
 	public void updateTitleAndContentsByNo(String title, String contents, String no) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		
+
 		int no1 = Integer.parseInt(no);
 
 		try {
@@ -193,10 +193,42 @@ public class BoardDao {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
-	
+
+	public void updatehit(String no) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		int no1 = Integer.parseInt(no);
+
+		try {
+			conn = getConnection();
+			String sql = "update board set hit = hit + 1 where no = ?";
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, no1);
+
+			pstmt.executeQuery();
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 	public void deleteByNo(Long no) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -237,9 +269,5 @@ public class BoardDao {
 
 		return conn;
 	}
-
-
-
-
 
 }

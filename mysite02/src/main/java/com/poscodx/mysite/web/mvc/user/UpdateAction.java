@@ -20,6 +20,8 @@ public class UpdateAction implements Action {
 		String gender = request.getParameter("gender");
 		String email = request.getParameter("email");
 		
+		System.out.println(email);
+		
 		new UserDao().updateNameAndPasswordByEmail(name, password, gender, email);
 
 		HttpSession session = request.getSession();

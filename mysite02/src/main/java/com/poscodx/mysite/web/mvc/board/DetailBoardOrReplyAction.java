@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.poscodx.mysite.dao.BoardDao;
 import com.poscodx.web.mvc.Action;
 import com.poscodx.web.util.WebUtil;
 
@@ -25,6 +26,9 @@ public class DetailBoardOrReplyAction implements Action {
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("depth", depth);
 		request.setAttribute("orderNo", orderNo);
+		
+		new BoardDao().updatehit(no);
+		
 		WebUtil.forward("board/view",request, response);
 
 	}

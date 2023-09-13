@@ -18,7 +18,7 @@
 		<div id="content">
 			<div id="board">
 				<form class="board-form" method="post"
-					action="${pageContext.request.contextPath }/board?a=updateboardorreply&no=${param.no}">
+					action="${pageContext.request.contextPath }/board?a=updateboardorreply&no=${param.no}&groupNo=${param.groupNo}&depth=${param.depth}&orderNo=${param.orderNo}">
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글수정</th>
@@ -34,8 +34,9 @@
 						</tr>
 					</table>
 					<div class="bottom">
-						<a href="${pageContext.request.contextPath }/board?a=detailboardorreply&no=${param.no}&title=${param.title}&contents=${param.contents}">취소</a> <input
-							type="submit" value="수정">
+						<a
+							href="${pageContext.request.contextPath }/board?a=detailboardorreply&no=${param.no}&title=${param.title}&contents=${param.contents}&groupNo=${param.groupNo}&depth=${param.depth}&orderNo=${param.orderNo}">취소</a>
+						<input type="submit" value="수정">
 					</div>
 				</form>
 			</div>

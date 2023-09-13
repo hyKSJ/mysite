@@ -21,6 +21,7 @@
 					<input id="name" name="name" type="text" value="${userVo.name }">
 
 					<label class="block-label" for="email">이메일</label>
+					<input type='hidden' name="email" value="${userVo.email }">
 					<h4>${userVo.email }</h4>
 					
 					<label class="block-label">패스워드</label>

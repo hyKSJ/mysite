@@ -41,7 +41,7 @@
 							<img src="${pageContext.request.contextPath }/assets/images/reply.png">							
 							</c:if>
 							<a href="${pageContext.request.contextPath }/board?a=detailboardorreply&no=${vo.no}&title=${vo.title}&contents=${vo.contents}&groupNo=${vo.groupNo}&depth=${vo.depth}&orderNo=${vo.orderNo}">${vo.title }</a></td>
-							<td>${vo.userNo }</td>
+							<td>${vo.name }</td>
 							<td>${vo.hit }</td>
 							<td>${vo.reg_date }</td>
 							<td><c:choose>
