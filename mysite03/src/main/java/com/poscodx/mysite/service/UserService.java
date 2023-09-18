@@ -11,9 +11,17 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public void addUser(UserVo vo) {
+//	@Autowired
+//	private MailSender mailSender;
+	
+	public void join(UserVo vo) {
 		userRepository.insert(vo);
-		
+//		mailSender.send(vo.getEmail(), "", "");
+	}
+
+	
+	public UserVo getUser(String email, String password) {
+		return userRepository.findByEmailAndPassword(email, password);
 	}
 
 }
