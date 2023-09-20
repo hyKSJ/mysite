@@ -1,13 +1,11 @@
 package com.poscodx.mysite.vo;
 
-import java.sql.Date;
-
 public class GuestbookVo {
 	private Long no;
 	private String name;
+	private String contents;
 	private String password;
-	private String message;
-	private Date date;
+	private String regDate;
 	public Long getNo() {
 		return no;
 	}
@@ -20,29 +18,27 @@ public class GuestbookVo {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getContents() {
+		return contents;
+	}
+	public void setContents(String contents) {
+		this.contents = contents;
+	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getMessage() {
-		return message;
+	public String getRegDate() {
+		return regDate;
 	}
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
 	}
 	@Override
 	public String toString() {
-		return "GuestbookVo [no=" + no + ", name=" + name + ", password=" + password + ", message=" + message
-				+ ", date=" + date + "]";
-	}
-	
-	
+		return "GuestbookVo [no=" + no + ", name=" + name + ", contents=" + contents + ", password=" + password
+				+ ", regDate=" + regDate + "]";
+	}	
 }
