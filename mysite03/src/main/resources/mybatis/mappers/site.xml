@@ -15,7 +15,8 @@
 		update site
 	   	   set title = #{title },
 		       welcome = #{welcome },
-			   description = #{description }
+			   description = #{description },
+			   profile = #{profile}
 	     where no = 1       	
 		]]>
 	</update>
