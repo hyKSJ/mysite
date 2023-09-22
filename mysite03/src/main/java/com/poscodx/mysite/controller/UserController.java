@@ -22,22 +22,22 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value="/join", method=RequestMethod.GET)
-	public String join() {
+	public String join(@ModelAttribute UserVo userVo) {
 		return "user/join";
 	}
 
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(@ModelAttribute @Valid UserVo userVo, BindingResult result, Model model) {
 		if(result.hasErrors()) {
-//			System.out.println(result);
-//			List<ObjectError> list = result.getAllErrors();
-//			for (ObjectError error : list) {
-//				System.out.println(error);
-//			}
-			model.addAllAttributes(result.getModel());
+			// List<ObjectError> list = result.getAllErrors();
+			// for(ObjectError error : list) {
+			//	System.out.println(error);
+			// }
 			
+			model.addAllAttributes(result.getModel());
 			return "user/join";
 		}
+		
 		userService.join(userVo);
 		return "redirect:/user/joinsuccess";
 	}
